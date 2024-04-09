@@ -8,9 +8,12 @@ image:
   repository: 047075577663.dkr.ecr.ap-south-1.amazonaws.com/boardgame
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
+  tag: "latest"
 
-imagePullSecrets: []
+imagePullSecrets:
+  - name: boardgame 
+  #create a secret with name boardgame using kubectl
+  
 nameOverride: ""
 fullnameOverride: ""
 
@@ -40,9 +43,11 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port: 80
-
+  type: NodePort
+  targetPort: 8080
+  port: 8080
+  nodePort: 31500
+  
 nodeSelector: {}
 
 tolerations: []
