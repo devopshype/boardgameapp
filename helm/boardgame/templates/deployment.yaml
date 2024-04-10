@@ -13,6 +13,7 @@ spec:
       labels:
         app: boardgame
     spec:
+      serviceAccountName: jenkins
       containers:
         - name: boardgame
           image: {{ .Values.image.repository }}
