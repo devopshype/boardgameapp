@@ -1,8 +1,8 @@
 pipeline{
 agent any
 tools {
-	  jdk 'Java17'
-	  maven 'Maven3'
+	jdk 'Java17'
+	maven 'Maven3'
  }
 environment {
 	dockerRegistry="047075577663.dkr.ecr.ap-south-1.amazonaws.com"
@@ -71,13 +71,13 @@ stages{
 				sh "docker push ${dockerRegistry}/${ecrRepo}:latest"
 			}
 		}
-	  }
+	    }
 	}
 	
 	stage('Deploy to Kubernetes'){
 	agent {label 'K8S'}
 	steps{
-		sh "helm upgrade --install ${helmChartName} ${path} --set image.repository=${dockerRegistry}/${ecrRepo} --set image.tag=$dockerImageTag"
+		sh "helm upgrade --install ${helmChartName} ${path} --set image.repository=${dockerRegistry}/${ecrRepo} --set image.tag=${dockerImageTag}"
 			}
 		}
 	}
