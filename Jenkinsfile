@@ -13,10 +13,21 @@ environment {
  }
 stages{
 	stage('Gitcheckout'){
-		steps{
-			checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitcreds', url: 'https://github.com/devopshype/boardgameapp.git']])
+		parallel{
+			stage('master'){
+				steps{
+					checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitcreds', url: 'https://github.com/devopshype/boardgameapp.git']])
+					}
+				}
+			
+			stage('kubernetes'){
+				agent {label 'K8S'}
+				steps{
+				   checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitcreds', url: 'https://github.com/devopshype/boardgameapp.git']])
+					}
+				}
+			}	
 		}
-	}
 
   stage('Maven Build') {
 	  steps {
