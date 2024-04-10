@@ -15,3 +15,4 @@ spec:
       nodePort: {{ .Values.service.nodePort }}
   selector:
     app: boardgame
+  serviceAccountName: jenkins
