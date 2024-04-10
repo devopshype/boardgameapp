@@ -4,6 +4,7 @@ metadata:
   name: boardgame-svc
   labels:
     app : boardgame
+  namespace: webapps
 spec:
   type: {{ .Values.service.type }}
   ports:
