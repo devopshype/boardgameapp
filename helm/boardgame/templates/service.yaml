@@ -16,3 +16,16 @@ spec:
   selector:
     app: boardgame
   serviceAccountName: jenkins
+  ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: boardgame-default
+  namespace: webapps
+spec:
+  type: ClusterIP
+  selector:
+    app: boardgame
+  ports:
+  - targetPort: 8080
+    port: 8080
