@@ -29,8 +29,9 @@ stages {
             mvn clean verify sonar:sonar \
             -Dsonar.projectName="$ecrRepo" \
             -Dsonar.projectKey="$ecrRepo" \
-			      -Dsonar.java.binaries=.
-            '''
+	    -Dsonar.java.binaries=. \
+     	    -Dsonar.profile=myQualityProfile \
+            -Dsonar.report.export.path=sonar-report.json'''
 			}
 		}
 	}
